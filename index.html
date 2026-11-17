@@ -3,33 +3,89 @@
 <head>
 <title>RAKESH 👑</title>
 <style>
-body { background: black; color: white; text-align: center; font-family: sans-serif; padding-top: 80px; }
-h1 { font-size: 60px; color: #FFD700; }
-p { font-size: 20px; color: #ccc; }
-.box { border: 1px solid #FFD700; padding: 20px; margin: 20px; border-radius: 15px; }
-a { color: #FFD700; text-decoration: none; font-weight: bold; }
+body { background: #1a0033; color: white; text-align: center; font-family: sans-serif; padding: 20px; }
+h1 { font-size: 50px; color: #FFD700; }
+.box { border: 1px solid #FF69B4; padding: 20px; margin: 20px auto; border-radius: 20px; max-width: 500px; background: #2a0055; }
+button { background: #FFD700; color: black; border: none; padding: 12px 20px; margin: 8px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; width: 90%; }
+button:hover { background: #FF69B4; color: white; }
+#result { font-size: 22px; color: #FFD700; font-weight: bold; margin-top: 15px; }
+a { color: #FF69B4; text-decoration: none; font-weight: bold; }
 </style>
 </head>
 <body>
-<h1>RAKESH 👑</h1>
-<p>Visakhapatnam | Dreamer | KING</p>
+<h1>RAKESH 👑💖</h1>
+<p>Anantapur | Cute KING | Sweet Heart</p>
 
 <div class="box">
-<h2>About Me</h2>
-<p>Hi! Nenu Rakesh. Nenu kottha vishayalu nerchukuntunnanu. Naa goal - Pedda ga edagadam!</p>
+<h2>💖 RAKESH Cute Silly Quiz</h2>
+<p>Nuvvu RAKESH ni Entha Baga Thelusu?</p>
+<p id="question">Loading...</p>
+<div id="options"></div>
+<p id="result"></p>
+<button onclick="nextQ()" id="nextBtn" style="display:none;">Next ➡️</button>
+<button onclick="startQuiz()" id="restartBtn" style="display:none;">Malli Aadu 🔁</button>
 </div>
 
 <div class="box">
-<h2>🔥 My Record</h2>
-<p>365 Days Chat Challenge - Day 2 DONE!</p>
-<p>Target - Guinness World Record!</p>
-</div>
-
-<div class="box">
-<h2>Follow Me</h2>
+<h2>Follow Me 💖</h2>
 <a href="https://www.instagram.com/ra_kesh.8a">Instagram - @ra_kesh.8a</a>
 </div>
 
-<p>Made with ❤️ by RAKESH</p>
+<script>
+let questions = [
+  { q: "1. RAKESH - Ki - Eppudu Aakali Vesthundi?", options: ["Morning", "Night", "Roju Antha - Cute ga 😋", "Aakali Ane Ledhu"], ans: "Roju Antha - Cute ga 😋" },
+  { q: "2. RAKESH - Biryani Chuste - Emi Chesthadu?", options: ["Photo Theesthadu", "First Ne Thintadu", "Friends Ki Kuda PettaDu", "Biryani Ne Chusi Navvuthadu 😂"], ans: "First Ne Thintadu" },
+  { q: "3. RAKESH - Mirror Chuste - Emi Antadu?", options: ["Hero La Unna", "Hair Set Cheskovali", "Selfie Time 📸", "Anni - Cute ga"], ans: "Anni - Cute ga" },
+  { q: "4. RAKESH - Ki - Kopam Vaste - Emi Chesthadu?", options: ["Silent Aipothadu", "Song Vintadu", "Biryani Thintadu", "2 Min Lo - Malli Navvuthadu 🥰"], ans: "2 Min Lo - Malli Navvuthadu 🥰" },
+  { q: "5. RAKESH - Exam Mundu Roju - Emi Chesthadu?", options: ["Chaduvuthadu", "Friends Ki Call Chesthadu", "YouTube Chusthadu", "Anni Chesthadu - Chaduvu Thappa 😂"], ans: "Anni Chesthadu - Chaduvu Thappa 😂" },
+  { q: "6. RAKESH - Ki - Best Gift Enti?", options: ["Biryani", "Oka Sweet Msg", "Oka Cute Selfie", "Anni - Love Tho Iste Chalu ❤️"], ans: "Anni - Love Tho Iste Chalu ❤️" },
+  { q: "7. RAKESH - Phone lo - Ekkva Emi Chusthadu?", options: ["Insta Reels", "Songs", "Friends Photos", "Anni - Roju Antha"], ans: "Insta Reels" },
+  { q: "8. RAKESH - Ni - Oka Maatalo Cheppalante?", options: ["Cute", "Funny", "Sweet Heart", "Anni Kalipi - RAKESH Ante Oka Feeling 💖"], ans: "Anni Kalipi - RAKESH Ante Oka Feeling 💖" },
+  { q: "9. RAKESH - Ki - Ammayilu Ante - Enti?", options: ["Respect", "Friends", "Best Friends", "Anni - Respect Tho - Cute ga"], ans: "Anni - Respect Tho - Cute ga" },
+  { q: "10. RAKESH - 365 Days Challenge - Enduku?", options: ["Guinness Kosam", "Famous Avvalani", "Friends Kosam", "KING Kabatti - KING Pani 👑"], ans: "KING Kabatti - KING Pani 👑" }
+];
+let current = 0, score = 0;
+function showQ() {
+  document.getElementById("result").innerText = "";
+  document.getElementById("nextBtn").style.display = "none";
+  let qq = questions[current];
+  document.getElementById("question").innerText = qq.q;
+  let html = "";
+  qq.options.forEach(opt => {
+    html += `<button onclick="checkAns('${opt}')">${opt}</button>`;
+  });
+  document.getElementById("options").innerHTML = html;
+}
+function checkAns(opt) {
+  if (opt === questions[current].ans) {
+    score++;
+    document.getElementById("result").innerText = "✅ Correct! Nuvvu RAKESH ni Baaga Thelusu! 💖";
+  } else {
+    document.getElementById("result").innerText = "❌ Ayyo! Correct - " + questions[current].ans;
+  }
+  document.getElementById("options").innerHTML = "";
+  document.getElementById("nextBtn").style.display = "block";
+}
+function nextQ() {
+  current++;
+  if (current < questions.length) { showQ(); }
+  else {
+    let msg = "";
+    if (score >= 8) msg = "🔥 " + score + "/10 - NUVVU RAKESH KI BEST FRIEND! 💖";
+    else if (score >= 5) msg = "😎 " + score + "/10 - Parledhu - Cute ga Thelusu!";
+    else msg = "😂 " + score + "/10 - Inka RAKESH ni Thelusukovali!";
+    document.getElementById("question").innerText = "Quiz Aipoyindi!";
+    document.getElementById("result").innerText = msg + " Screenshot Theesi RAKESH Ki Pampu!";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("restartBtn").style.display = "block";
+  }
+}
+function startQuiz() {
+  current = 0; score = 0;
+  document.getElementById("restartBtn").style.display = "none";
+  showQ();
+}
+startQuiz();
+</script>
 </body>
 </html>
